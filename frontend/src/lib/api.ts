@@ -1,4 +1,4 @@
-const API_URL = "http://193.222.99.69:8000";
+const API_URL = "";
 
 async function request<T>(
   path: string,
