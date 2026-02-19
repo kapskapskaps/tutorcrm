@@ -122,3 +122,22 @@ def delete_lesson(
         raise HTTPException(status_code=404, detail="Lesson not found")
     db.delete(lesson)
     db.commit()
+
+
+@router.delete("/{lesson_id}/series", status_code=204)
+def delete_lesson_series(
+    lesson_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Delete all lessons for the same student + course as the given lesson."""
+    lesson = db.query(Lesson).filter(Lesson.id == lesson_id, Lesson.user_id == current_user.id).first()
+    if not lesson:
+        raise HTTPException(status_code=404, detail="Lesson not found")
+
+    db.query(Lesson).filter(
+        Lesson.user_id == current_user.id,
+        Lesson.student_name == lesson.student_name,
+        Lesson.course_name == lesson.course_name,
+    ).delete()
+    db.commit()

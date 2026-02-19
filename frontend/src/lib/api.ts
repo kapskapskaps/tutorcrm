@@ -108,3 +108,7 @@ export function updateLesson(id: number, data: Partial<Lesson>) {
 export function deleteLesson(id: number) {
   return request<void>(`/api/lessons/${id}`, { method: "DELETE" });
 }
+
+export function deleteLessonSeries(id: number) {
+  return request<void>(`/api/lessons/${id}/series`, { method: "DELETE" });
+}
