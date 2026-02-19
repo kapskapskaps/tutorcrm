@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://193.222.99.69:8000";
+const API_URL = "http://193.222.99.69:8000";
 
 async function request<T>(
   path: string,
